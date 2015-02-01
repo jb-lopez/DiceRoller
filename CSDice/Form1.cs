@@ -142,10 +142,29 @@ namespace CSDice
 
         }
 
-        private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
+        private void SaveSettings()
         {
-            MessageBox.Show("Closing");
-            //TODO: Save the settings here.
+            System.Collections.Specialized.StringCollection NameSettings = new System.Collections.Specialized.StringCollection();
+            System.Collections.Specialized.StringCollection NumSettings = new System.Collections.Specialized.StringCollection();
+            System.Collections.Specialized.StringCollection SideSettings = new System.Collections.Specialized.StringCollection();
+            System.Collections.Specialized.StringCollection ModSettings = new System.Collections.Specialized.StringCollection();
+            for (int I = 0; I < 10; I++)
+            {
+                NameSettings.Add(txtName[I].Text);
+                NumSettings.Add(txtNum[I].Text);
+                SideSettings.Add(txtSide[I].Text);
+                ModSettings.Add(txtMod[I].Text);
+            }
+            CSDice.Properties.Settings.Default.Name = NameSettings;
+            CSDice.Properties.Settings.Default.Num = NumSettings;
+            CSDice.Properties.Settings.Default.Side = SideSettings;
+            CSDice.Properties.Settings.Default.Modi = ModSettings;
+            CSDice.Properties.Settings.Default.Save();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveSettings();
         }
     }
 }
